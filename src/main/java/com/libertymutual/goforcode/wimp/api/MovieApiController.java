@@ -41,7 +41,7 @@ private MovieRepository movieRepo;
 	public Movie getOne(@PathVariable long id) throws StuffNotFoundException {
 		Movie movie = movieRepo.findOne(id);
 		if (movie == null) {
-		return movieRepo.findOne(id);
+			throw new StuffNotFoundException();
 		}
 		return movie;
 	}
