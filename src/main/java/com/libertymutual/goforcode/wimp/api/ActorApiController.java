@@ -18,7 +18,7 @@ import com.libertymutual.goforcode.wimp.models.Movie;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 @RestController
-@RequestMapping("/api/actor")
+@RequestMapping("/api/actors")
 public class ActorApiController {
 
 	private ActorRepository actorRepo;
