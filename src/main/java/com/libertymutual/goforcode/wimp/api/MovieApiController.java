@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.wimp.models.Actor;
 import com.libertymutual.goforcode.wimp.models.Movie;
+import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 
 
@@ -22,14 +23,16 @@ import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 public class MovieApiController {
 
 private MovieRepository movieRepo;
-	
-	public MovieApiController(MovieRepository movieRepo) {
+private ActorRepository actorRepo;
+
+	public MovieApiController(MovieRepository movieRepo, ActorRepository actorRepo) {
 		this.movieRepo = movieRepo;
+		this.actorRepo = actorRepo;
 		
 		movieRepo.save(new Movie("Inglorious Bastards", "Miramax"));
 		movieRepo.save(new Movie("Fight Club", "Warner Brothers"));
-		movieRepo.save(new Movie("Fury", "Warner Brothers"));
-
+		movieRepo.save(new Movie("Fury", "Warner Brothers"));		
+		movieRepo.save(new Movie("Moneyball", "Warner Brothers"));		
 	}
 	
 	@GetMapping("")
@@ -65,6 +68,17 @@ private MovieRepository movieRepo;
 	}
 	
 	
+	@PostMapping("{movieId}/actors") //creates an association between movies and an actor
+									//add actorId via JSON
+	public Movie associateAnActor(@PathVariable long movieId, @RequestBody Actor actor) {
+		Movie movie = movieRepo.findOne(movieId);
+		actor = actorRepo.findOne(actor.getId());
+		
+		movie.addActor(actor);
+		movieRepo.save(movie); //this should insert record in join table
+		return movie;
+	}
+		
 	@PutMapping("{id}")
 	 public Movie update(@RequestBody Movie movie, @PathVariable long id) {
 		movie.setId(id);
