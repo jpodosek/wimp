@@ -51,6 +51,7 @@ public class MovieApiController {
 	public Movie deleteOne(@PathVariable long id) {
 		try {
 			Movie movie = new Movie();
+			movie = movieRepo.findOne(id);
 			movieRepo.delete(id);
 			return movie;
 		} catch (EmptyResultDataAccessException erdae) {

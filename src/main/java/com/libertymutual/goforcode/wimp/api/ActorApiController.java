@@ -52,6 +52,7 @@ public class ActorApiController {
 	public Actor deleteOne(@PathVariable long id) {
 		try {
 			Actor actor = new Actor();
+			actor = actorRepo.findOne(id);
 			actorRepo.delete(id);
 			return actor;
 		} catch (EmptyResultDataAccessException erdae) {

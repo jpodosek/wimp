@@ -30,7 +30,6 @@ public class MovieApiControllerTests {
 		movieController = new MovieApiController(movieRepo, actorRepo);
 	}
 	
-	
 	@Test
 	public void test_getAll_returns_all_Movies_returned_by_the_repo() {
 		// Arrange
@@ -153,10 +152,7 @@ public class MovieApiControllerTests {
 		//Assert
 		verify(movieRepo).save(movie); //verify that method got called with this exact argument		
 		verify(movieRepo).findOne(3L);
-		verify(actorRepo).findOne(2L);
-		
+		verify(actorRepo).findOne(2L);		
 	}
-
-	
 
 }
