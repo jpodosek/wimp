@@ -33,30 +33,17 @@ public class Actor {
 	@Column(length = 75)
 	private String lastName;
 
-	Long activeSinceYear;
+	private Long activeSinceYear;
 	
-	Date birthDate;
+	private Date birthDate;
 	
 	//@JsonIgnore
 	@ManyToMany(mappedBy="actors")
 	private List<Movie> movies;
 	
-	public List<Movie> getMovies() {
-		return movies;	
-	}
-	
-	
 	@OneToMany (cascade = CascadeType.ALL)
 	private List<Award> awards;
 	
-	public List<Award> getAwards() {
-		return awards;
-	}
-	
-	public void setMovies(List<Movie> movies) {
-		this.movies = movies;
-	}
-
 	public Actor() {}
 	public Actor(String firstName, String lastName) {
 		this.firstName = firstName;
@@ -68,6 +55,20 @@ public class Actor {
 		this.lastName = lastName;
 		this.birthDate = birthDate;
 	}
+	
+	
+	
+	
+	public List<Movie> getMovies() {
+		return movies;	
+	}
+	
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
+	}
+
+	
+
 	
 	public void addAward(Award award) {
 		if (awards == null) {
@@ -116,6 +117,10 @@ public class Actor {
 		this.birthDate = birthDate;
 	}
 
+	public List<Award> getAwards() {
+		return awards;
+	}
+	
 	public void setAwards(List<Award> awards) {
 		this.awards = awards;
 	}

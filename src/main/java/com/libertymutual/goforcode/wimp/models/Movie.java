@@ -34,12 +34,13 @@ public class Movie {
 	
 	@Column(length = 500, nullable = false)
 	private String distributor;
-
-	public Movie() {
-	};
-
+	
 	@ManyToMany
 	private List<Actor> actors;
+
+	public Movie() {};
+
+	
 
 	public List<Actor> getActors() {
 		return actors;
@@ -49,8 +50,6 @@ public class Movie {
 
 		this.actors = actors;
 	}
-
-	
 
 	public Movie(String title, String distributor) {
 		this.title = title;
